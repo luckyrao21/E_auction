@@ -63,7 +63,7 @@ exports.edit = (request,response,next)=>{
         }
      )
      .then(result=>{
-        if(result.modifiedCount==1) 
+        if(result.modifiedCount == 1) 
           return response.status(201).json({message: "Updated Successfully"});
         else
           return response.status(201).json({error: "Not Updated.."});           
