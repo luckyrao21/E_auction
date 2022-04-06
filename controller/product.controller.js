@@ -69,7 +69,7 @@ exports.edit = (request,response,next)=>{
           return response.status(201).json({error: "Not Updated.."});           
      })
     .catch(err=>{
-        console.log(err+"===========================errrrr");
+        console.log(err+"=======================errrrr");
         return response.status(201).json({error: "Internal Server Error......."});
     });      
 }
