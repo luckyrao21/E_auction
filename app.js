@@ -3,10 +3,11 @@ const bodyparser = require("body-parser");
 const mongoose = require("mongoose");
 const adminRouter = require("./routes/admin.route")
 const path=require("path")
+const sellerRouter = require('./routes/seller.route');
+const productRouter = require('./routes/product.route');
 
 // const multer=require("multer");
 const cors = require("cors");
-const { path } = require("express/lib/application");
 
 const app = express();
 app.use(cors());
@@ -25,6 +26,10 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 
 app.use("/",adminRouter);
+
+app.use("/api/seller",sellerRouter);
+
+app.use("/api/product",productRouter);
 
 app.listen(3000, () => {
     console.log("application is runnning.....")
