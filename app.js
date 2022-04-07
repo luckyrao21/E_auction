@@ -5,10 +5,11 @@ const adminRouter = require("./routes/admin.route")
 
 const customerRouter=require("./routes/customer.seller.route")
 const path=require("path")
+const sellerRouter = require('./routes/seller.route');
+const productRouter = require('./routes/product.route');
 
 // const multer=require("multer");
 const cors = require("cors");
-// const { path } = require("express/lib/application");
 
 const app = express();
 app.use(cors());
@@ -28,6 +29,10 @@ app.use(bodyparser.json());
 
 app.use("/",adminRouter);
 app.use("/customer",customerRouter)
+
+app.use("/api/seller",sellerRouter);
+
+app.use("/api/product",productRouter);
 
 app.listen(3000, () => {
     console.log("application is runnning.....")
