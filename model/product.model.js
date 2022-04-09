@@ -36,7 +36,10 @@ const productSchema = new mongoose.Schema({
     isApproved: {
         type: Boolean,
         default: false
-    }
-
+    },
+    createdDate: {
+        type: Date,
+        default:new Date.now
+    },
 })
 module.exports = mongoose.model("product", productSchema);
