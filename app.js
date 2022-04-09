@@ -5,7 +5,7 @@ const adminRouter = require("./routes/admin.route")
 
 const customerRouter=require("./routes/customer.seller.route")
 const path=require("path")
-const sellerRouter = require('./routes/seller.route');
+// const sellerRouter = require('./routes/seller.route');
 const productRouter = require('./routes/product.route');
 
 // const multer=require("multer");
@@ -30,7 +30,7 @@ app.use(bodyparser.json());
 app.use("/",adminRouter);
 app.use("/customer",customerRouter)
 
-app.use("/api/seller",sellerRouter);
+// app.use("/api/seller",sellerRouter);
 
 app.use("/api/product",productRouter);
 
