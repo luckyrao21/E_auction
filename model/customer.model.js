@@ -42,7 +42,7 @@ const customerSchema = new mongoose.Schema({
     },
     joiningDate: {
         type: Date,
-        default: new Date.now()
+        default: Date.now()
     }
 })
 module.exports = mongoose.model("customer", customerSchema);
