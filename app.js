@@ -37,5 +37,5 @@ app.use("/customerBuyer",BuyerRouter)
 app.use("/api/product",productRouter);
 
 app.listen(3000, () => {
-    console.log("application is runnning.....")
+    console.log("application is runnning.......")
 })
