@@ -37,7 +37,6 @@ app.use("/complaint",complaintRoute)
 app.use("/order",orderRoute)
 
 
-
 // app.use("/api/seller",sellerRouter);
 
 app.use("/product",productRouter);

@@ -37,10 +37,10 @@ const productSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    AddTime: {
+    createdDate: {
         type: Date,
-        default: new Date,
-        required: true
-    }
+        default:new Date.now
+    },
+
 })
 module.exports = mongoose.model("product", productSchema);
