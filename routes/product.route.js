@@ -55,7 +55,7 @@ route.post("/approved-product-list-by-seller", productController.approvedProduct
 
 route.post("/cancel-product-list-by-seller", productController.cancelProductListBySeller);
 
-route.post("/cancel-product-auction", productController.cancelProductAuction);
+// route.post("/cancel-product-auction", productController.cancelProductAuction);
 
     
 module.exports = route;
