@@ -4,6 +4,7 @@ const Customer = require('../model/customer.model');
 const { validationResult } = require('express-validator');
 const nodemailer=require('nodemailer');
 
+
 exports.deleteCategory = (request, response) => {
     categorymodel.deleteOne({ _id: request.body.id })
         .then(result => {
@@ -126,7 +127,8 @@ exports.RemoveFromBlock = (request, response) => {
         // console.log(result)
         return response.status(200).json(result);
     }).catch(err => {
-        return response.status(500).json(err);
+ 
+       return response.status(500).json(err);
     })
 }
 
@@ -143,6 +145,8 @@ exports.updateProfile = (request, response) => {
             return response.status(500).json(err);
         })
 }
+
+
 exports.forgetPassword =(request,response) =>{
     console.log(request.body);
     Admin.findOne({
@@ -164,7 +168,7 @@ exports.forgetPassword =(request,response) =>{
               var message = {
                 from: "vaishali24raghuvanshi@gmail.com",
                 to: "rajkasotiya26@gmail.com",
-                subject: "Confirm your account on Book-Us-Meal",
+                subject: "Confirm your account on E_auction application",
                 html:
                   '<p>Thanks for signing up with Book-Us-Meal! You must follow this link within 30 days of registration to activate your account:</p><a href= "https://book-us-meal.herokuapp.com/customer/verify-account/'+result._id+'">click here</a><p>Have fun, and dont hesitate to contact us with your feedback</p><br><p> The Book-Us-Meal Team</p><a href="#">book-us-meal@gmail.com</a>',
               };
