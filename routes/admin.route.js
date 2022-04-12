@@ -1,24 +1,44 @@
 const { request } = require("express");
 const { response } = require("express");
-const express=require("express");
+const express = require("express");
 const res = require("express/lib/response");
-const adminModel = require("../model/admin.model");
-const router=express.Router();
-const amdinModel=require("../model/admin.model");
+const admincontroller = require("../controller/admin.controller");
+const router = express.Router();
+const { body } = require('express-validator');
 
-router.post("/login",(request,response)=>{
-    console.log(request.body);
+const multer = require('multer');
+var storage = multer.diskStorage(
+    {
+        destination: 'public/images',
+        filename: function (req, file, cb) {
+            cb(null, Date.now() + "-" + file.originalname);
+        }
+    }
+);
+var upload = multer({ storage: storage });
 
-    adminModel.create({
-        email:request.body.email,
-        password:request.body.password
-    }).then(result=>{
-        console.log(result);
-        return response.status(200).json(result)
-    }).catch(err=>{
-        console.log(err);
-        return response.status(500).json({message:"oops someting went wrong"})
-    })
-})
+router.post("/add", upload.single('categoryImage'),
+    body('categoryName').not().isEmpty(),
+    admincontroller.add
+);
+router.get("/category-list",
+    admincontroller.getCategory);
 
-module.exports=router
+router.post("/delete-category", admincontroller.deleteCategory);
+
+router.post("/update", upload.single('categoryImage'),
+    body('categoryName').not().isEmpty(),
+
+    admincontroller.update
+);
+router.post('/signin', body("email").isEmail(),
+    body("password"),
+    admincontroller.signin);
+router.get("/customer-list",
+   admincontroller.getCustomer
+)
+router.post('/update-profile', admincontroller.updateProfile);
+router.post("/AddToBlock", admincontroller.AddToBlock);
+router.post("/RemoveFromBlock", admincontroller.RemoveFromBlock);
+router.post("/forget-password",admincontroller.forgetPassword);
+module.exports = router
