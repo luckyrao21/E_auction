@@ -2,6 +2,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const adminRouter = require("./routes/admin.route")
 
+// <<<<<<< jayshree
+// const customerRouter = require("./routes/customer.seller.route")
+// const BuyerRouter = require("./routes/customer.buyer.route")
+// const path = require("path")
+// =======
 const bidRoute=require("./routes/bid.route")
 const complaintRoute=require("./routes/complaint.route")
 const orderRoute=require("./routes/order.route")
@@ -30,7 +35,8 @@ mongoose.connect("mongodb+srv://lucky:1234@cluster1.bvxkm.mongodb.net/E_auction?
     console.log("not connected")
 })
 
-app.use(express.static(path.join(__dirname,'public')))
+app.use(express.static(path.join(__dirname, 'public')))
+
 
 app.use("/",adminRouter);
 app.use("/customer",customerRouter)
