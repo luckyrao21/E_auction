@@ -1,7 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const adminRouter = require("./routes/admin.route")
-
+const bidRoute=require("./routes/bid.route")
+const complaintRoute=require("./routes/complaint.route")
+const orderRoute=require("./routes/order.route")
 const customerRouter=require("./routes/customer.seller.route")
 const path=require("path")
 
@@ -10,6 +12,7 @@ const productRouter = require('./routes/product.route');
 
 // const multer=require("multer");
 const cors = require("cors");
+const { application } = require("express");
 
 
 const app = express();
@@ -31,10 +34,14 @@ app.use(bodyparser.json());
 
 app.use("/",adminRouter);
 app.use("/customer",customerRouter)
+app.use("/bid",bidRoute);
+app.use("/complaint",complaintRoute)
+app.use("/order",orderRoute)
+
 
 // app.use("/api/seller",sellerRouter);
 
-app.use("/api/product",productRouter);
+app.use("/product",productRouter);
 
 
 app.listen(3000, () => {
