@@ -1,3 +1,4 @@
+
 const categorymodel = require("../model/category.model");
 const Admin = require('../model/admin.model');
 const Customer = require('../model/customer.model');
@@ -190,3 +191,4 @@ exports.forgetPassword =(request,response) =>{
         return response.status(500).json({err:"oops something is wrong"})
     })
 }
+

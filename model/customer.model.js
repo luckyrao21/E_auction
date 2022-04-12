@@ -38,11 +38,12 @@ const customerSchema = new mongoose.Schema({
         default: false
     },
     customerRoll: {
-        type: String
+        type: String,
+        required:true
     },
     joiningDate: {
         type: Date,
-        default: Date.now()
+        default:Date.now
     }
 })
 module.exports = mongoose.model("customer", customerSchema);
