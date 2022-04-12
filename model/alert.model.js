@@ -15,3 +15,4 @@ const alertSchema=new mongoose.Schema({
         ]
 })
 module.exports=mongoose.model("alert",alertSchema);
+
