@@ -2,9 +2,8 @@ const mongoose=require("mongoose");
 const schema=mongoose.Schema;
 
 const orderSchema=new mongoose.Schema({
-      userId:{
+    userId:{
           type:schema.Types.ObjectId,
-          required:true,
           ref:'customer'
       },
      productId:{
@@ -16,7 +15,6 @@ const orderSchema=new mongoose.Schema({
          type:Number,
         //  length:10,
          required:true,
-         unique:true
      },
      address:{
             type:String,
