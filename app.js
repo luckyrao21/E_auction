@@ -9,6 +9,8 @@ const path = require("path")
 const productRouter = require('./routes/product.route');
 const cors = require("cors");
 
+const port=process.env.PORT||3000;
+
 const app = express();
 app.use(cors());
 
@@ -33,7 +35,7 @@ app.use("/bid", bidRoute);
 app.use("/complaint", complaintRoute)
 app.use("/order", orderRoute)
 app.use("/product", productRouter);
-
-app.listen(3000, () => {
+        
+app.listen(port, () => {
     console.log("application is runnning.....", 3000)
 })
