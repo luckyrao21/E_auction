@@ -4,6 +4,9 @@ const { body } = require('express-validator');
 const route = express.Router();
 const firebase = require("../middleware/firebase.middleware");
 const token = require('../middleware/token.middleware');
+const requests = require('request');
+
+
 const multer = require("multer");
 var storage = multer.diskStorage({
     destination: "public/images",
@@ -34,11 +37,11 @@ route.post("/edit-product",token.verifyToken, upload.single('productImage'),
     body('productName').notEmpty(),
     body('productDesc').notEmpty(),
     body('productInitialPrice').isNumeric().notEmpty(),
-    body('creator').notEmpty(),
     body('startTime').notEmpty(),
     body('endTime').notEmpty(),
     body('categoryName').notEmpty(),
     body('productId').notEmpty(),
+    body('oldImage').notEmpty(),
     firebase.fireBaseStorage,
     
     productController.edit);

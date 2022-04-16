@@ -10,11 +10,6 @@ mongoose.connect("mongodb+srv://lucky:1234@cluster1.bvxkm.mongodb.net/E_auction?
 const adminRouter = require("./routes/admin.route")
 const bodyParser = require('body-parser')
 
-// <<<<<<< jayshree
-// const customerRouter = require("./routes/customer.seller.route")
-// const BuyerRouter = require("./routes/customer.buyer.route")
-// const path = require("path")
-// =======
 const bidRoute = require("./routes/bid.route")
 const complaintRoute = require("./routes/complaint.route")
 const orderRoute = require("./routes/order.route")
