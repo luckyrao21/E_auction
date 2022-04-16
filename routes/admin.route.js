@@ -31,6 +31,7 @@ router.post("/delete-category",token.verifyToken, admincontroller.deleteCategory
 
 router.post("/update",token.verifyToken, upload.single('categoryImage'),
     body('categoryName').not().isEmpty(),
+    body('oldImage').notEmpty(),
     firebase.fireBaseStorage,
     admincontroller.update
 );
