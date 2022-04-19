@@ -56,6 +56,8 @@ route.post("/product-list-category", productController.productListByCategory);
 
 route.post("/product-list-by-seller",token.verifyToken, productController.productListBySeller);
 
+route.post("/product-by-id",token.verifyToken, productController.productById);
+
 route.post("/approved-product-list-by-seller",token.verifyToken, productController.approvedProductListBySeller);
 
 route.post("/cancel-product-list-by-seller",token.verifyToken, productController.cancelProductListBySeller);
@@ -64,3 +66,4 @@ route.post("/cancel-product-auction",token.verifyToken, productController.cancel
 
     
 module.exports = route;
+

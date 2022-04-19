@@ -57,7 +57,10 @@ exports.edit = (request, response, next) => {
   request.body.productImage = "https://firebasestorage.googleapis.com/v0/b/productdb-eaa0c.appspot.com/o/" + request.file.filename + "?alt=media&token=abcddcba";
 
   Product.updateOne(
-    { startTime: { $lt: Date.now() }, _id: request.body.productId },
+    { 
+      startTime: { $lt: Date.now() },
+     _id: request.body.productId 
+    },
     {
       $set: {
         productName: request.body.productName,
@@ -247,6 +250,20 @@ exports.productListByCategory = (request, response, next) => {
 
 exports.productListBySeller = (request, response, next) => {
   Product.find({ creator: request.body.creatorId })
+    .then(result => {
+      if (result.length > 0)
+        return response.status(201).json(result);
+      else
+        return response.status(201).json({ message: "Result Not Found......." });
+    })
+    .catch(err => {
+      console.log(err + "===========================errrrr");
+      return response.status(201).json({ error: "Internal Server Error......." });
+    });
+}
+
+exports.productById = (request, response, next) => {
+  Product.find({ _id: request.body.productId })
     .then(result => {
       if (result.length > 0)
         return response.status(201).json(result);
