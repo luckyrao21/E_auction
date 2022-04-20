@@ -2,8 +2,8 @@ const { Storage } = require('@google-cloud/storage');
 const path = require('path');
 
 const storage = new Storage({
-    projectId: "productdb-eaa0c",
-    keyFilename: "productdb-eaa0c-firebase-adminsdk-jgsmm-e0d9b194c0.json"
+    projectId:"productdb-eaa0c",
+    keyFilename:"productdb-eaa0c-firebase-adminsdk-jgsmm-e0d9b194c0.json"
 });
 
 let bucketName = "gs://productdb-eaa0c.appspot.com";

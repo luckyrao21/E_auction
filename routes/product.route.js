@@ -64,4 +64,6 @@ route.post("/cancel-product-list-by-seller", token.verifyToken, productControlle
 
 route.post("/cancel-product-auction", token.verifyToken, productController.cancelProductAuction);
 
+    
 module.exports = route;
+
