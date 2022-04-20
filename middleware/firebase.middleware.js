@@ -1,4 +1,4 @@
-const {Storage} = require('@google-cloud/storage');
+const { Storage } = require('@google-cloud/storage');
 const path = require('path');
 
 const storage = new Storage({
@@ -8,22 +8,21 @@ const storage = new Storage({
 
 let bucketName = "gs://productdb-eaa0c.appspot.com";
 
-exports.fireBaseStorage = async (request, response, next)=>{
-   try{
-   console.log("=====================inside try");
+exports.fireBaseStorage = async(request, response, next) => {
+    try {
+        console.log("=====================inside try");
 
-       await storage.bucket(bucketName).upload(path.join(__dirname,'../',"./public/images/")+request.file.filename,{
-           gzip: true,
-           metadata:{
-               metadata:{
-                   firebaseStorageDownloadTokens:"abcddcba"
-               }
-           }
-       })
-   }
-   catch(err){
-       console.log(err);
-   }
-//    console.log(request.file.filename);
-   next();
+        await storage.bucket(bucketName).upload(path.join(__dirname, '../', "./public/images/") + request.file.filename, {
+            gzip: true,
+            metadata: {
+                metadata: {
+                    firebaseStorageDownloadTokens: "abcddcba"
+                }
+            }
+        })
+    } catch (err) {
+        console.log(err);
+    }
+    //    console.log(request.file.filename);
+    next();
 }
