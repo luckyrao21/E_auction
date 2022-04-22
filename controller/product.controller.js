@@ -56,12 +56,10 @@ exports.edit = (request, response, next) => {
 
     request.body.productImage = "https://firebasestorage.googleapis.com/v0/b/productdb-eaa0c.appspot.com/o/" + request.file.filename + "?alt=media&token=abcddcba";
 
-    Product.updateOne(
-        {
+    Product.updateOne({
             startTime: { $lt: Date.now() },
             _id: request.body.productId
-        },
-        {
+        }, {
             $set: {
                 productName: request.body.productName,
                 productDesc: request.body.productDesc,
@@ -71,11 +69,10 @@ exports.edit = (request, response, next) => {
                 categoryName: request.body.categoryName,
                 productImage: request.body.productImage
             }
-        }
-    )
+        })
         .then(result => {
             if (result.modifiedCount == 1) {
-                
+
                 requests({
                     url: request.body.oldImage,
                     qs: {
@@ -97,8 +94,8 @@ exports.edit = (request, response, next) => {
 
 exports.isApproved = (request, response, next) => {
     Product.updateOne({ _id: request.body.productId }, {
-        $set: { isApproved: true }
-    })
+            $set: { isApproved: true }
+        })
         .then(result => {
             if (result.modifiedCount == 1) {
                 Product.findOne({ _id: request.body.productId }).populate('creator')
@@ -146,8 +143,8 @@ exports.isApproved = (request, response, next) => {
 
 exports.isApprovedCancel = (request, response, next) => {
     Product.updateOne({ _id: request.body.productId }, {
-        $set: { isApproved: false }
-    })
+            $set: { isApproved: false }
+        })
         .then(result => {
             if (result.modifiedCount == 1) {
                 Product.findOne({ _id: request.body.productId }).populate('creator')
@@ -200,14 +197,14 @@ exports.isApprovedCancel = (request, response, next) => {
 exports.searchProduct = (request, response, next) => {
     var regex = new RegExp(request.body.searchText, 'i');
     Product.find({
-        isApproved: true,
-        $or: [
-            { productName: regex },
-            { categoryName: regex },
-            { productDesc: regex }
+            isApproved: true,
+            $or: [
+                { productName: regex },
+                { categoryName: regex },
+                { productDesc: regex }
 
-        ]
-    })
+            ]
+        })
         .then(result => {
             if (result.length > 0)
                 return response.status(201).json(result);
@@ -222,13 +219,15 @@ exports.searchProduct = (request, response, next) => {
 
 exports.productListByCategory = (request, response, next) => {
     Product.find({
-        $and: [
-            { isApproved: true },
-            { categoryName: request.body.categoryName }
-        ]
-    })
+            $and: [
+                { isApproved: true },
+                { categoryName: request.body.categoryName },
+                { _id: { $ne: request.body.productId } }
+            ]
+        })
         .then(result => {
             if (result.length > 0)
+
                 return response.status(201).json(result);
             else
                 return response.status(201).json({ message: "Result Not Found......." });
@@ -254,9 +253,9 @@ exports.productListBySeller = (request, response, next) => {
 }
 
 exports.productById = (request, response, next) => {
-    Product.find({ _id: request.body.productId })
+    Product.findOne({ _id: request.body.productId })
         .then(result => {
-            if (result.length > 0)
+            if (result)
                 return response.status(201).json(result);
             else
                 return response.status(201).json({ message: "Result Not Found......." });
@@ -270,11 +269,11 @@ exports.productById = (request, response, next) => {
 
 exports.approvedProductListBySeller = (request, response, next) => {
     Product.find({
-        $and: [
-            { isApproved: true },
-            { creator: request.body.creatorId }
-        ]
-    })
+            $and: [
+                { isApproved: true },
+                { creator: request.body.creatorId }
+            ]
+        })
         .then(result => {
             if (result.length > 0)
                 return response.status(201).json(result);
@@ -289,11 +288,11 @@ exports.approvedProductListBySeller = (request, response, next) => {
 
 exports.cancelProductListBySeller = (request, response, next) => {
     Product.find({
-        $and: [
-            { isApproved: false },
-            { creator: request.body.creatorId }
-        ]
-    })
+            $and: [
+                { isApproved: false },
+                { creator: request.body.creatorId }
+            ]
+        })
         .then(result => {
             if (result.length > 0) {
                 return response.status(201).json(result);
@@ -309,8 +308,8 @@ exports.cancelProductListBySeller = (request, response, next) => {
 
 exports.cancelProductAuction = (request, response, next) => {
     Product.updateOne({ startTime: { $lt: Date.now() }, _id: request.body.productId }, {
-        $set: { isApproved: false }
-    })
+            $set: { isApproved: false }
+        })
         .then(result => {
             if (result.modifiedCount == 1)
                 return response.status(201).json({ message: "Canceled Successfully" });
