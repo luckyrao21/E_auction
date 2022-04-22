@@ -253,7 +253,7 @@ exports.productListBySeller = (request, response, next) => {
 exports.productById = (request, response, next) => {
     Product.findOne({ _id: request.body.productId })
         .then(result => {
-            if (result.length > 0)
+            if (result)
                 return response.status(201).json(result);
             else
                 return response.status(201).json({ message: "Result Not Found......." });
