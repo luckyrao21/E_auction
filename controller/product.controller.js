@@ -221,11 +221,13 @@ exports.productListByCategory = (request, response, next) => {
     Product.find({
             $and: [
                 { isApproved: true },
-                { categoryName: request.body.categoryName }
+                { categoryName: request.body.categoryName },
+                { _id: { $ne: request.body.productId } }
             ]
         })
         .then(result => {
             if (result.length > 0)
+
                 return response.status(201).json(result);
             else
                 return response.status(201).json({ message: "Result Not Found......." });
